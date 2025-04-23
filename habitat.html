@@ -26,6 +26,41 @@
     section {
       margin-bottom: 20px;
     }
+
+    /* Style pour l'effet de zoom */
+    #zoomable-image {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    #zoomable-image.zoom {
+      transform: scale(2);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Style pour la croix de fermeture */
+    .close-button {
+      display: none; /* Masqué par défaut */
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    #zoomable-image.zoom + .close-button {
+      display: block; /* Affiche la croix lorsque l'image est zoomée */
+    }
   </style>
 </head>
 <body>
@@ -40,16 +75,19 @@
   <main>
     <section>
       <h2>Zones humides et végétation aquatique</h2>
-      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non seulement un abri, mais également une source abondante de nourriture, essentielle à leur survie.</p>
+      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non[...]
     </section>
     <section>
       <h2>Importance écologique</h2>
-      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des populations de nuisibles et favorise la biodiversité dans son habitat naturel.</p>
-      <img src="Image3.jpeg" alt="voilà les différentes parties du corps de l'agrion a fer de lance">
+      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des p[...]
+      <div style="position: relative;">
+        <img id="zoomable-image" src="Image3.jpeg" alt="voilà les différentes parties du corps de l'agrion a fer de lance">
+        <button class="close-button" id="close-button">×</button>
+      </div>
     </section>
     <section>
       <h2>Principales menaces</h2>
-      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs entraînent une réduction de leur habitat et une baisse significative de leur population.</p>
+      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs ent[...]
     </section>
   </main>
   <footer>
@@ -83,6 +121,18 @@
     setInterval(() => {
       headerTitle.style.color = headerTitle.style.color === 'white' ? '#c8e6c9' : 'white';
     }, 1000);
+
+    // Script pour l'effet de zoom et la croix
+    const zoomableImage = document.getElementById('zoomable-image');
+    const closeButton = document.getElementById('close-button');
+
+    zoomableImage.addEventListener('click', () => {
+      zoomableImage.classList.add('zoom');
+    });
+
+    closeButton.addEventListener('click', () => {
+      zoomableImage.classList.remove('zoom');
+    });
   </script>
 </body>
 </html>
