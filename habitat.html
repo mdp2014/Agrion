@@ -26,44 +26,6 @@
     section {
       margin-bottom: 20px;
     }
-
-    /* Style pour l'effet de zoom */
-    #zoomable-image {
-      transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
-      cursor: pointer;
-    }
-
-    #zoomable-image.zoom {
-      transform: scale(2); /* Zoom de l'image */
-      position: fixed; /* Positionnement fixe pour centrer */
-      top: 50%; /* Centre verticalement */
-      left: 50%; /* Centre horizontalement */
-      transform: translate(-50%, -50%) scale(2); /* Ajustement exact avec translate */
-      z-index: 10;
-    }
-
-    /* Style pour la croix de fermeture */
-    .close-button {
-      display: none; /* Masqué par défaut */
-      position: fixed; /* Positionnement fixe */
-      top: 10%; /* Position relative à l'écran */
-      right: 10%; /* Position relative à l'écran */
-      background-color: red;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 20px;
-      line-height: 30px;
-      text-align: center;
-      cursor: pointer;
-      z-index: 20;
-    }
-
-    #zoomable-image.zoom + .close-button {
-      display: block; /* Affiche la croix lorsque l'image est zoomée */
-    }
   </style>
 </head>
 <body>
@@ -78,19 +40,15 @@
   <main>
     <section>
       <h2>Zones humides et végétation aquatique</h2>
-      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non[...[...]
+      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non seulement un espace pour pondre leurs œufs, mais aussi un écosystème riche pour leur développement larvaire et leur survie. Les plantes aquatiques offrent protection et nourriture aux larves, tandis que la qualité de l’eau joue un rôle crucial dans leur cycle de vie.</p>
     </section>
     <section>
       <h2>Importance écologique</h2>
-      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des p[...[...]
-      <div style="position: relative;">
-        <img id="zoomable-image" src="Image3.jpeg" alt="voilà les différentes parties du corps de l'agrion a fer de lance">
-        <button class="close-button" id="close-button">×</button>
-      </div>
+      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des populations d’insectes nuisibles. De plus, l’Agrion à fer de lance sert de source de nourriture pour des prédateurs plus grands tels que les oiseaux et les amphibiens, formant ainsi une partie essentielle de la chaîne alimentaire.</p>
     </section>
     <section>
       <h2>Principales menaces</h2>
-      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs ent[...[...]
+      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces perturbations ont entraîné une réduction significative de ses habitats naturels. La fragmentation des zones humides complique également la recherche de partenaires pour la reproduction, mettant en danger la survie de l’espèce à long terme.</p>
     </section>
   </main>
   <footer>
@@ -124,18 +82,6 @@
     setInterval(() => {
       headerTitle.style.color = headerTitle.style.color === 'white' ? '#c8e6c9' : 'white';
     }, 1000);
-
-    // Script pour l'effet de zoom et la croix
-    const zoomableImage = document.getElementById('zoomable-image');
-    const closeButton = document.getElementById('close-button');
-
-    zoomableImage.addEventListener('click', () => {
-      zoomableImage.classList.add('zoom');
-    });
-
-    closeButton.addEventListener('click', () => {
-      zoomableImage.classList.remove('zoom');
-    });
   </script>
 </body>
 </html>
