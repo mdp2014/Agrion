@@ -5,10 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menaces - Agrion à fer de lance</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #ffebee, #ffcdd2);
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #e57373;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    ul li {
+      margin: 10px 0;
+      transition: transform 0.3s ease;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>🐞 Menaces pour l'Agrion à fer de lance</h1>
+    <h1 id="header-title">🐞 Menaces pour l'Agrion à fer de lance</h1>
   </header>
   <nav>
     <a href="index.html">Accueil</a>
@@ -17,16 +40,37 @@
   </nav>
   <main>
     <h2>Les menaces principales</h2>
-    <ul>
+    <ul id="threat-list">
       <li>Destruction des zones humides</li>
       <li>Pollution de l’eau</li>
       <li>Changements climatiques</li>
       <li>Usage intensif de pesticides</li>
     </ul>
-    <p>Préserver, restaurer et sensibiliser sont des actions essentielles pour protéger cette espèce fascinante.</p>
   </main>
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
+
+  <script>
+    // Animation de rebond sur les éléments de liste
+    const listItems = document.querySelectorAll('#threat-list li');
+    listItems.forEach(item => {
+      item.addEventListener('mouseover', () => {
+        item.style.transform = 'scale(1.1)';
+      });
+      item.addEventListener('mouseout', () => {
+        item.style.transform = 'scale(1)';
+      });
+    });
+
+    // Animation de surbrillance sur le titre
+    const headerTitle = document.getElementById('header-title');
+    setInterval(() => {
+      headerTitle.style.backgroundColor =
+        headerTitle.style.backgroundColor === 'white' ? '#ffcdd2' : 'white';
+      headerTitle.style.color =
+        headerTitle.style.color === '#e57373' ? 'black' : '#e57373';
+    }, 1000);
+  </script>
 </body>
 </html>
