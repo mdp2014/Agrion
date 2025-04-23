@@ -5,10 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Habitat - Agrion à fer de lance</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #e8f5e9, #c8e6c9);
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>🐞 Habitat de l'Agrion à fer de lance</h1>
+    <h1 id="header-title">🐞 Habitat de l'Agrion à fer de lance</h1>
   </header>
   <nav>
     <a href="index.html">Accueil</a>
@@ -17,10 +35,33 @@
   </nav>
   <main>
     <h2>Zones humides et végétation aquatique</h2>
-    <p>L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces habitats lui offrent un environnement idéal pour se nourrir, se reproduire et survivre.</p>
+    <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique.</p>
   </main>
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
+
+  <script>
+    // Animation de texte sur la description
+    const description = document.getElementById('description');
+    let index = 0;
+    const text = description.textContent;
+    description.textContent = '';
+
+    function typeEffect() {
+      if (index < text.length) {
+        description.textContent += text[index];
+        index++;
+        setTimeout(typeEffect, 50);
+      }
+    }
+    typeEffect();
+
+    // Animation de couleur sur le titre
+    const headerTitle = document.getElementById('header-title');
+    setInterval(() => {
+      headerTitle.style.color = headerTitle.style.color === 'white' ? '#c8e6c9' : 'white';
+    }, 1000);
+  </script>
 </body>
 </html>
