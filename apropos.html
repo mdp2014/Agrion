@@ -5,10 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>À propos - Agrion à fer de lance</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #e3f2fd, #bbdefb);
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #0288d1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2em;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffcc80;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h2, h3 {
+      color: #01579b;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>🐞 À propos de ce site</h1>
+    <h1 id="title">🐞 À propos de ce site</h1>
   </header>
   <nav>
     <a href="index.html">Accueil</a>
@@ -20,15 +56,38 @@
     <p>Ce site a été créé pour sensibiliser le public à la préservation de l’Agrion à fer de lance, un insecte menacé par la destruction de son habitat et par les activités humaines.</p>
     <h3>Sources</h3>
     <ul>
-      <li>iNaturalist – Statut de conservation global et observations naturalistes : Base de données collaborative recensant des observations géolocalisées et le statut IUCN « Least Concern »</li>
-      <li>National Biodiversity Data Centre (Irlande) – Fiche de statut européen et national : Confirmation du statut « Least Concern » pour l’Irlande et l’Union européenne</li>
-      <li>Catalogue of Life (via Wikipédia) – Détails taxonomiques et synonymes : Répertoire mondial validant la classification et les synonymes de l’espèce</li>
-      <li>Wikipédia FR – Fiche « Agrion élégant » (Ischnura elegans) : Page détaillée sur la taxonomie, la morphologie et l’écologie de l’espèce</li>
+      <li>iNaturalist – Statut de conservation global et observations naturalistes</li>
+      <li>National Biodiversity Data Centre (Irlande) – Fiche de statut européen et national</li>
+      <li>Catalogue of Life (via Wikipédia) – Détails taxonomiques et synonymes</li>
+      <li>Wikipédia FR – Fiche « Agrion élégant » (Ischnura elegans)</li>
     </ul>
     <p>Pour toute question ou suggestion, n’hésitez pas à nous écrire à <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a>.</p>
   </main>
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
+
+  <script>
+    // Animation JavaScript : Titre clignotant
+    const title = document.getElementById('title');
+    let isVisible = true;
+
+    setInterval(() => {
+      isVisible = !isVisible;
+      title.style.opacity = isVisible ? '1' : '0.5';
+    }, 1000);
+
+    // Animation sur les liens de navigation
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseover', () => {
+        link.style.transform = 'scale(1.2)';
+        link.style.transition = 'transform 0.3s ease';
+      });
+      link.addEventListener('mouseout', () => {
+        link.style.transform = 'scale(1)';
+      });
+    });
+  </script>
 </body>
 </html>
