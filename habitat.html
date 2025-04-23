@@ -29,22 +29,25 @@
 
     /* Style pour l'effet de zoom */
     #zoomable-image {
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
       cursor: pointer;
     }
 
     #zoomable-image.zoom {
-      transform: scale(2);
-      position: relative;
+      transform: scale(2); /* Zoom de l'image */
+      position: fixed; /* Positionnement fixe pour centrer */
+      top: 50%; /* Centre verticalement */
+      left: 50%; /* Centre horizontalement */
+      transform: translate(-50%, -50%) scale(2); /* Ajustement exact avec translate */
       z-index: 10;
     }
 
     /* Style pour la croix de fermeture */
     .close-button {
       display: none; /* Masqué par défaut */
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      position: fixed; /* Positionnement fixe */
+      top: 10%; /* Position relative à l'écran */
+      right: 10%; /* Position relative à l'écran */
       background-color: red;
       color: white;
       border: none;
@@ -75,11 +78,11 @@
   <main>
     <section>
       <h2>Zones humides et végétation aquatique</h2>
-      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non[...]
+      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non[...[...]
     </section>
     <section>
       <h2>Importance écologique</h2>
-      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des p[...]
+      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des p[...[...]
       <div style="position: relative;">
         <img id="zoomable-image" src="Image3.jpeg" alt="voilà les différentes parties du corps de l'agrion a fer de lance">
         <button class="close-button" id="close-button">×</button>
@@ -87,7 +90,7 @@
     </section>
     <section>
       <h2>Principales menaces</h2>
-      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs ent[...]
+      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs ent[...[...]
     </section>
   </main>
   <footer>
