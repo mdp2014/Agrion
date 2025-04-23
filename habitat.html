@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habitat - Agrion à fer de lance</title>
+  <title>Habitat et Menaces - Agrion à fer de lance</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     body {
@@ -22,11 +22,15 @@
     main {
       padding: 20px;
     }
+
+    section {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1 id="header-title">🐞 Habitat de l'Agrion à fer de lance</h1>
+    <h1 id="header-title">🌿 Habitat et Menaces de l'Agrion à fer de lance</h1>
   </header>
   <nav>
     <a href="index.html">Accueil</a>
@@ -34,8 +38,18 @@
     <a href="apropos.html">À propos</a>
   </nav>
   <main>
-    <h2>Zones humides et végétation aquatique</h2>
-    <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique.</p>
+    <section>
+      <h2>Zones humides et végétation aquatique</h2>
+      <p id="description">L’Agrion à fer de lance vit principalement dans les zones humides, les étangs et les mares calmes riches en végétation aquatique. Ces environnements fournissent non seulement un abri, mais également une source abondante de nourriture, essentielle à leur survie.</p>
+    </section>
+    <section>
+      <h2>Importance écologique</h2>
+      <p id="importance">Cette espèce joue un rôle crucial dans l’équilibre des écosystèmes aquatiques. En tant que prédateur d’insectes plus petits, il contribue à la régulation des populations de nuisibles et favorise la biodiversité dans son habitat naturel.</p>
+    </section>
+    <section>
+      <h2>Principales menaces</h2>
+      <p id="threats">L’Agrion à fer de lance fait face à de nombreuses menaces, notamment la destruction des zones humides, la pollution des eaux et le changement climatique. Ces facteurs entraînent une réduction de leur habitat et une baisse significative de leur population.</p>
+    </section>
   </main>
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
@@ -44,18 +58,24 @@
   <script>
     // Animation de texte sur la description
     const description = document.getElementById('description');
-    let index = 0;
-    const text = description.textContent;
-    description.textContent = '';
+    const importance = document.getElementById('importance');
+    const threats = document.getElementById('threats');
+    const elements = [description, importance, threats];
 
-    function typeEffect() {
-      if (index < text.length) {
-        description.textContent += text[index];
-        index++;
-        setTimeout(typeEffect, 50);
+    elements.forEach((element) => {
+      let index = 0;
+      const text = element.textContent;
+      element.textContent = '';
+
+      function typeEffect() {
+        if (index < text.length) {
+          element.textContent += text[index];
+          index++;
+          setTimeout(typeEffect, 50);
+        }
       }
-    }
-    typeEffect();
+      typeEffect();
+    });
 
     // Animation de couleur sur le titre
     const headerTitle = document.getElementById('header-title');
