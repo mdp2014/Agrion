@@ -1,231 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agrion à fer de lance — Animations JavaScript</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Agrion à fer de lance</title>
   <style>
-    /* Reset & typographie de base */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f8ff;
-      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff;
     }
-    header, footer {
-      background: #006400; color: #fff; text-align: center;
-      padding: 1rem; position: sticky; width: 100%;
-    }
-    header { top: 0; }
-    footer { bottom: 0; margin-top: 2rem; }
-    nav ul { display: flex; justify-content: center; gap: 2rem; list-style: none; }
-    nav a {
-      color: #fff; text-decoration: none; font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    nav a:hover, nav a.active {
-      background-color: #90ee90;
-      color: #fff;
-    }
-
-    main { padding: 2rem; }
-    section { margin-bottom: 4rem; opacity: 0; transform: translateY(30px); }
-
-    .card {
-      display: flex; align-items: center; gap: 2rem;
-      background: #fff; padding: 2rem; border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .card img { width: 200px; border-radius: 8px; }
-
-    .threats li { margin: .5rem 0; }
-
-    /* Pour le canvas particules */
-    #particle-canvas {
-      position: fixed; top: 0; left: 0; pointer-events: none;
-      z-index: -1;
-    }
-
-    #back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: #006400;
+    header {
+      background-color: #006400;
       color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      z-index: 1000;
+      padding: 1rem 0;
+      text-align: center;
+    }
+    nav {
+      background-color: #90ee90;
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #006400;
+      font-weight: bold;
+    }
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+    footer {
+      background-color: #006400;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
-
   <header>
-    <h1 id="logo">🐞 Agrion à fer de lance</h1>
-    <nav>
-      <ul>
-        <li><a href="#presentation" class="active">Présentation</a></li>
-        <li><a href="#habitat">Habitat</a></li>
-        <li><a href="#menaces">Menaces</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <h1>🐞 Agrion à fer de lance</h1>
   </header>
-
+  <nav>
+    <a href="habitat.html">Habitat</a>
+    <a href="menaces.html">Menaces</a>
+    <a href="apropos.html">À propos</a>
+  </nav>
   <main>
-    <section id="presentation">
-      <h2>Présentation</h2>
-      <div class="card">
-        <img src="agrion.jpg" alt="Agrion" />
-        <p>L’Agrion à fer de lance (Ischnura elegans) est une demoiselle bleue et noire d’environ 30 mm.</p>
-      </div>
-    </section>
-
-    <section id="habitat">
-      <h2>Habitat</h2>
-      <p>Zones humides, étangs et mares calmes riches en végétation aquatique.</p>
-    </section>
-
-    <section id="menaces">
-      <h2>Menaces & Protection</h2>
-      <ul class="threats">
-        <li>Destruction des zones humides</li>
-        <li>Pollution de l’eau</li>
-        <li>Changements climatiques</li>
-        <li>Usage intensif de pesticides</li>
-      </ul>
-      <p>Préserver, restaurer et sensibiliser pour protéger l’espèce.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Contactez-nous</h2>
-      <p>Pour toute information ou suggestion, envoyez-nous un email à <a href="mailto:contact@biodiversite.fr">contact@biodiversite.fr</a>.</p>
-    </section>
+    <h2>Bienvenue sur le site de l'Agrion à fer de lance</h2>
+    <p>Explorez les différentes sections pour en savoir plus sur cet insecte fascinant, son habitat, les menaces qui pèsent sur lui, et bien plus encore.</p>
   </main>
-
   <footer>
-    <p>&copy; 2025 Protection de la Biodiversité</p>
-    <p>Contactez-nous : <a href="mailto:contact@biodiversite.fr">contact@biodiversite.fr</a></p>
+    <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
-
-  <button id="back-to-top">↑</button>
-
-  <script>
-    /* ================================
-       1. Effet de particules JS 
-    =================================*/
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-    function initCanvas() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      particles = Array.from({length: 120}, () => ({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: Math.random()*2+1,
-        dx: (Math.random()-0.5)*1.5,
-        dy: (Math.random()-0.5)*1.5
-      }));
-    }
-    function drawParticles() {
-      ctx.clearRect(0,0,W,H);
-      particles.forEach(p => {
-        p.x += p.dx; p.y += p.dy;
-        if (p.x < 0 || p.x > W) p.dx *= -1;
-        if (p.y < 0 || p.y > H) p.dy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
-        ctx.fillStyle = 'rgba(0,100,0,0.2)';
-        ctx.fill();
-      });
-      requestAnimationFrame(drawParticles);
-    }
-    window.addEventListener('resize', initCanvas);
-    initCanvas(); drawParticles();
-
-    /* ======================================
-       2. Apparition des sections au scroll
-    ========================================*/
-    const sections = document.querySelectorAll('main section');
-    const obs = new IntersectionObserver((entries, observer) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.transition = 'opacity 1s, transform 1s';
-          e.target.style.opacity = 1;
-          e.target.style.transform = 'translateY(0)';
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.25 });
-    sections.forEach(sec => obs.observe(sec));
-
-    /* ==================================
-       3. Logo qui rebondit en continu
-    ====================================*/
-    const logo = document.getElementById('logo');
-    let angle = 0;
-    function bounceLogo() {
-      angle += 0.03;
-      logo.style.transform = 'translateY(' + Math.sin(angle)*10 + 'px)';
-      requestAnimationFrame(bounceLogo);
-    }
-    bounceLogo();
-
-    /* ========================================
-       4. Nav links qui ondulent au survol JS
-    ==========================================*/
-    document.querySelectorAll('nav a').forEach(a => {
-      a.addEventListener('mouseover', () => {
-        a.animate([
-          { transform: 'translateY(0)' },
-          { transform: 'translateY(-8px)' },
-          { transform: 'translateY(0)' }
-        ], { duration: 400, iterations: 1 });
-      });
-    });
-
-    /* ====================================
-       5. Texte typewriter au clic JS
-    ======================================*/
-    function typeWriter(el) {
-      const txt = el.textContent;
-      el.textContent = '';
-      let i = 0;
-      const interval = setInterval(() => {
-        el.textContent += txt.charAt(i++);
-        if (i > txt.length) clearInterval(interval);
-      }, 50);
-    }
-    document.querySelectorAll('section p').forEach(p =>
-      p.addEventListener('click', () => typeWriter(p))
-    );
-
-    /* ============================================
-       6. Effet parallax sur image au scroll JS
-    ===============================================*/
-    window.addEventListener('scroll', () => {
-      const img = document.querySelector('.card img');
-      const offset = window.scrollY;
-      img.style.transform = `translateY(${offset * 0.1}px) rotate(${offset * 0.02}deg)`;
-    });
-
-    /* ========================================
-       7. Bouton Retour en haut
-    ==========================================*/
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
 </body>
 </html>
