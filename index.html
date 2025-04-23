@@ -22,13 +22,12 @@
     nav a { color: #fff; text-decoration: none; font-weight: bold; }
 
     main { padding: 2rem; }
-    section { margin-bottom: 4rem; opacity: 0; }
+    section { margin-bottom: 4rem; opacity: 0; transform: translateY(30px); }
 
     .card {
       display: flex; align-items: center; gap: 2rem;
       background: #fff; padding: 2rem; border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transform: scale(0.8);
     }
     .card img { width: 200px; border-radius: 8px; }
 
@@ -60,7 +59,7 @@
       <h2>Présentation</h2>
       <div class="card">
         <img src="agrion.jpg" alt="Agrion" />
-        <p>L’<strong>Agrion à fer de lance</strong> (Ischnura elegans) est une demoiselle bleue et noire d’environ 30 mm.</p>
+        <p>L’Agrion à fer de lance (Ischnura elegans) est une demoiselle bleue et noire d’environ 30 mm.</p>
       </div>
     </section>
 
@@ -86,119 +85,104 @@
   </footer>
 
   <script>
-  /* ================================
-     1. Effet de particules JS 
-  ==================================*/
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  function initCanvas() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    particles = Array.from({length: 120}, () => ({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      r: Math.random()*2+1,
-      dx: (Math.random()-0.5)*1.5,
-      dy: (Math.random()-0.5)*1.5
-    }));
-  }
-  function drawParticles() {
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p => {
-      p.x += p.dx; p.y += p.dy;
-      if(p.x<0||p.x>W) p.dx*=-1;
-      if(p.y<0||p.y>H) p.dy*=-1;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-      ctx.fillStyle = 'rgba(0,100,0,0.2)';
-      ctx.fill();
+    /* ================================
+       1. Effet de particules JS 
+    =================================*/
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    function initCanvas() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      particles = Array.from({length: 120}, () => ({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: Math.random()*2+1,
+        dx: (Math.random()-0.5)*1.5,
+        dy: (Math.random()-0.5)*1.5
+      }));
+    }
+    function drawParticles() {
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => {
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > W) p.dx *= -1;
+        if (p.y < 0 || p.y > H) p.dy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
+        ctx.fillStyle = 'rgba(0,100,0,0.2)';
+        ctx.fill();
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas(); drawParticles();
+
+    /* ======================================
+       2. Apparition des sections au scroll
+    ========================================*/
+    const sections = document.querySelectorAll('main section');
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.transition = 'opacity 1s, transform 1s';
+          e.target.style.opacity = 1;
+          e.target.style.transform = 'translateY(0)';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    sections.forEach(sec => obs.observe(sec));
+
+    /* ==================================
+       3. Logo qui rebondit en continu
+    ====================================*/
+    const logo = document.getElementById('logo');
+    let angle = 0;
+    function bounceLogo() {
+      angle += 0.03;
+      logo.style.transform = 'translateY(' + Math.sin(angle)*10 + 'px)';
+      requestAnimationFrame(bounceLogo);
+    }
+    bounceLogo();
+
+    /* ========================================
+       4. Nav links qui ondulent au survol JS
+    ==========================================*/
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('mouseover', () => {
+        a.animate([
+          { transform: 'translateY(0)' },
+          { transform: 'translateY(-8px)' },
+          { transform: 'translateY(0)' }
+        ], { duration: 400, iterations: 1 });
+      });
     });
-    requestAnimationFrame(drawParticles);
-  }
-  window.addEventListener('resize', initCanvas);
-  initCanvas(); drawParticles();
 
-  /* ======================================
-     2. Apparition des sections au scroll
-  ========================================*/
-  const sections = document.querySelectorAll('main section');
-  const obs = new IntersectionObserver((ent, obsr) => {
-    ent.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.transition = 'opacity 1s, transform 1s';
-        e.target.style.opacity = 1;
-        e.target.style.transform = 'translateY(0)';
-        obsr.unobserve(e.target);
-      }
+    /* ====================================
+       5. Texte typewriter au clic JS
+    ======================================*/
+    function typeWriter(el) {
+      const txt = el.textContent;
+      el.textContent = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        el.textContent += txt.charAt(i++);
+        if (i > txt.length) clearInterval(interval);
+      }, 50);
+    }
+    document.querySelectorAll('section p').forEach(p =>
+      p.addEventListener('click', () => typeWriter(p))
+    );
+
+    /* ============================================
+       6. Effet parallax sur image au scroll JS
+    ===============================================*/
+    window.addEventListener('scroll', () => {
+      const img = document.querySelector('.card img');
+      const offset = window.scrollY;
+      img.style.transform = `translateY(${offset * 0.1}px) rotate(${offset * 0.02}deg)`;
     });
-  }, { threshold: 0.25 });
-  sections.forEach(sec => {
-    sec.style.transform = 'translateY(30px)';
-    obs.observe(sec);
-  });
-
-  /* ==================================
-     3. Logo qui rebondit en continu
-  ====================================*/
-  const logo = document.getElementById('logo');
-  let angle = 0;
-  function bounceLogo() {
-    angle += 0.03;
-    logo.style.transform = 'translateY(' + Math.sin(angle)*10 + 'px)';
-    requestAnimationFrame(bounceLogo);
-  }
-  bounceLogo();
-
-  /* ============================================
-     4. Carte qui pulse et tourne au hover
-  ==============================================*/
-  const card = document.querySelector('.card');
-  card.addEventListener('mouseenter', () => {
-    card.animate([
-      { transform: 'scale(1)' },
-      { transform: 'scale(1.05) rotate(5deg)' },
-      { transform: 'scale(1)' }
-    ], { duration: 800, iterations: 1 });
-  });
-
-  /* ========================================
-     5. Nav links qui ondulent au survol JS
-  ==========================================*/
-  document.querySelectorAll('nav a').forEach(a => {
-    a.addEventListener('mouseover', () => {
-      a.animate([
-        { transform: 'translateY(0)' },
-        { transform: 'translateY(-8px)' },
-        { transform: 'translateY(0)' }
-      ], { duration: 400, iterations: 1 });
-    });
-  });
-
-  /* ====================================
-     6. Texte typewriter au clic JS
-  ======================================*/
-  function typeWriter(el) {
-    const txt = el.textContent;
-    el.textContent = '';
-    let i = 0;
-    const interval = setInterval(() => {
-      el.textContent += txt.charAt(i++);
-      if (i > txt.length) clearInterval(interval);
-    }, 50);
-  }
-  document.querySelectorAll('section p').forEach(p => {
-    p.addEventListener('click', () => typeWriter(p));
-  });
-
-  /* =============================================
-     7. Effet parallax sur image au scroll JS
-  ===============================================*/
-  window.addEventListener('scroll', () => {
-    const img = document.querySelector('.card img');
-    const offset = window.scrollY;
-    img.style.transform = `translateY(${offset * 0.1}px) rotate(${offset * 0.02}deg)`;
-  });
   </script>
 </body>
 </html>
