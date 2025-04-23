@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie - Agrion à fer de lance</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #e8f5e9, #c8e6c9);
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #4caf50;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📸 Galerie - Agrion à fer de lance</h1>
+  </header>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="menaces.html">Menaces</a>
+    <a href="apropos.html">À propos</a>
+  </nav>
+  <main>
+    <section>
+      <h2>Photos de l'Agrion à fer de lance</h2>
+      <p>Découvrez les différentes images de l’Agrion à fer de lance dans son habitat naturel.</p>
+      <div class="gallery">
+        <img src="images/agrion1.jpg" alt="Agrion à fer de lance - Vue 1">
+        <img src="images/agrion2.jpg" alt="Agrion à fer de lance - Vue 2">
+        <img src="images/agrion3.jpg" alt="Agrion à fer de lance - Vue 3">
+        <img src="images/agrion4.jpg" alt="Agrion à fer de lance - Vue 4">
+        <img src="images/agrion5.jpg" alt="Agrion à fer de lance - Vue 5">
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
+  </footer>
+</body>
+</html>
