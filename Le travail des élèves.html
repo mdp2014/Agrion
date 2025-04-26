@@ -3,12 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le travail des élèves</title>
+  <title>Nouvelle Galerie - 13 Photos</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #e8f5e9, #c8e6c9);
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #4caf50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border: 2px solid #4caf50;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #4caf50;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>📸 Nouvelle Galerie</h1>
+    <h1>📸 Nouvelle Galerie - 13 Photos</h1>
   </header>
   <nav>
     <a href="index.html">Accueil</a>
@@ -18,8 +69,9 @@
   <main>
     <section>
       <h2>Photos Diverses</h2>
+      <p>Découvrez une sélection de 13 photos dans cette galerie.</p>
       <div class="gallery">
-        <!-- Liens à remplir -->
+        <!-- 13 photos à remplacer -->
         <img src="chemin/photo1.jpg" alt="Photo 1">
         <img src="chemin/photo2.jpg" alt="Photo 2">
         <img src="chemin/photo3.jpg" alt="Photo 3">
