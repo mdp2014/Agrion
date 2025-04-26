@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nouvelle Galerie - 13 Photos</title>
+  <title>Le travail des élèves</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     body {
@@ -55,6 +55,36 @@
     nav a:hover {
       text-decoration: underline;
     }
+
+    /* Styles pour le zoom */
+    .modal {
+      display: none; /* Masqué par défaut */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .modal .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -71,22 +101,45 @@
       <h2>Photos Diverses</h2>
       <p>Découvrez une sélection de 13 photos dans cette galerie.</p>
       <div class="gallery">
-        <!-- 13 photos à remplacer -->
-        <img src="le_travaille_des_enfants/100-0171.jpg" alt="Photo 1">
-        <img src="le_travaille_des_enfants/100-0172.jpg" alt="Photo 2">
-        <img src="le_travaille_des_enfants/100-0173.jpg" alt="Photo 3">
-        <img src="le_travaille_des_enfants/100-0174.jpg" alt="Photo 4">
-        <img src="le_travaille_des_enfants/100-0175.jpg" alt="Photo 5">
-        <img src="le_travaille_des_enfants/100-0176.jpg" alt="Photo 6">
-        <img src="le_travaille_des_enfants/100-0177.jpg" alt="Photo 7">
-        <img src="le_travaille_des_enfants/100-0181.jpg" alt="Photo 8">
-        <img src="le_travaille_des_enfants/100-0182.jpg" alt="Photo 9">
-        <img src="le_travaille_des_enfants/100-0184.jpg" alt="Photo 10">
+        <img src="le_travaille_des_enfants/100-0171.jpg" alt="Photo 1" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0172.jpg" alt="Photo 2" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0173.jpg" alt="Photo 3" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0174.jpg" alt="Photo 4" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0175.jpg" alt="Photo 5" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0176.jpg" alt="Photo 6" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0177.jpg" alt="Photo 7" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0181.jpg" alt="Photo 8" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0182.jpg" alt="Photo 9" onclick="openModal(this)">
+        <img src="le_travaille_des_enfants/100-0184.jpg" alt="Photo 10" onclick="openModal(this)">
       </div>
     </section>
   </main>
+
+  <!-- Modal pour le zoom -->
+  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Zoomed Image">
+  </div>
+
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
+
+  <script>
+    // Fonction pour ouvrir le modal
+    function openModal(image) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = image.src; // Met à jour la source de l'image
+      modal.style.display = 'flex'; // Affiche le modal
+    }
+
+    // Fonction pour fermer le modal
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none'; // Masque le modal
+    }
+  </script>
 </body>
 </html>
