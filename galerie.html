@@ -55,6 +55,36 @@
     nav a:hover {
       text-decoration: underline;
     }
+
+    /* Styles pour le zoom */
+    .modal {
+      display: none; /* Masqué par défaut */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .modal .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -72,16 +102,40 @@
       <h2>Photos de l'Agrion à fer de lance</h2>
       <p>Découvrez les différentes images de l’Agrion à fer de lance dans son habitat naturel.</p>
       <div class="gallery">
-        <img src="galerie/1455544412_4_CERIAGRION_HASTULATUM_C.SEGUIN_-m-le.jpg" alt="Agrion à fer de lance - Vue 1">
-        <img src="galerie/Image3.jpeg" alt="Agrion à fer de lance - Vue 2">
-        <img src="galerie/image.jpeg" alt="Agrion à fer de lance - Vue 3">
-        <img src="images/agrion4.jpg" alt="Agrion à fer de lance - Vue 4">
-        <img src="images/agrion5.jpg" alt="Agrion à fer de lance - Vue 5">
+        <img src="galerie/1455544412_4_CERIAGRION_HASTULATUM_C.SEGUIN_-m-le.jpg" alt="Agrion à fer de lance - Vue 1" onclick="openModal(this)">
+        <img src="galerie/Image3.jpeg" alt="Agrion à fer de lance - Vue 2" onclick="openModal(this)">
+        <img src="galerie/image.jpeg" alt="Agrion à fer de lance - Vue 3" onclick="openModal(this)">
+        <img src="images/agrion4.jpg" alt="Agrion à fer de lance - Vue 4" onclick="openModal(this)">
+        <img src="images/agrion5.jpg" alt="Agrion à fer de lance - Vue 5" onclick="openModal(this)">
       </div>
     </section>
   </main>
+
+  <!-- Modal pour le zoom -->
+  <div class="modal" id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Zoomed Image">
+  </div>
+
   <footer>
     <p>&copy; 2025 - Contactez-nous : <a href="mailto:marin.depibrac@gmail.com">marin.depibrac@gmail.com</a></p>
   </footer>
+
+  <script>
+    // Fonction pour ouvrir le modal
+    function openModal(image) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      
+      modalImage.src = image.src; // Met à jour la source de l'image
+      modal.style.display = 'flex'; // Affiche le modal
+    }
+
+    // Fonction pour fermer le modal
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none'; // Masque le modal
+    }
+  </script>
 </body>
 </html>
